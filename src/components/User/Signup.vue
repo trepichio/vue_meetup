@@ -1,19 +1,15 @@
 <template>
-	<div>Signup Page</div>
+  <div>Signup Page</div>
 </template>
 
 <script>
 export default {
+  name: "Signup",
 
-  name: 'Signup',
-
-  data () {
-    return {
-
-    }
+  data() {
+    return {};
   }
-}
+};
 </script>
 
-<style lang="css" scoped>
-</style>
+<style lang="css" scoped></style>

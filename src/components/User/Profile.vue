@@ -1,19 +1,15 @@
 <template>
-	<div>Profile page</div>
+  <div>Profile page</div>
 </template>
 
 <script>
 export default {
+  name: "Profile",
 
-  name: 'Profile',
-
-  data () {
-    return {
-
-    }
+  data() {
+    return {};
   }
-}
+};
 </script>
 
-<style lang="css" scoped>
-</style>
+<style lang="css" scoped></style>
