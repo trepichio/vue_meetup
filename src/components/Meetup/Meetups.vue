@@ -37,8 +37,6 @@
 </template>
 
 <script>
-import formatDate from '@/filters/date'
-
 export default {
   name: "Meetups",
 
@@ -49,9 +47,6 @@ export default {
     meetups () {
       return this.$store.getters.loadedMeetups;
     }
-  },
-  filters: {
-    formatDate
   }
 };
 </script>

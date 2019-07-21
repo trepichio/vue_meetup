@@ -25,7 +25,6 @@
 </template>
 
 <script>
-import formatDate from '@/filters/date';
 export default {
 
   name: 'Meetup',
@@ -45,9 +44,6 @@ export default {
     meetup () {
       return this.$store.getters.loadedMeetup(this.id)
     }
-  },
-  filters: {
-  	formatDate
   }
 }
 </script>

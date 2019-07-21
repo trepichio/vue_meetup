@@ -4,6 +4,9 @@ import Vuetify from 'vuetify'
 import App from "./App.vue";
 import router from "./router";
 import { store } from './store';
+import DateFilter from './filters/date';
+
+Vue.filter('formatDate', DateFilter)
 
 Vue.config.productionTip = false;
 
