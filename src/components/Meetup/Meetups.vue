@@ -17,7 +17,7 @@
                     <h5 class="headline white--text mb-0">
                       {{meetup.title}}
                     </h5>
-                    <div>{{meetup.date}}</div>
+                    <div>{{meetup.date | formatDate}}</div>
                     <div><v-icon>room</v-icon>{{meetup.location}}</div>
                   </div>
                 </v-card-title>
@@ -37,6 +37,8 @@
 </template>
 
 <script>
+import formatDate from '@/filters/date'
+
 export default {
   name: "Meetups",
 
@@ -47,6 +49,9 @@ export default {
     meetups () {
       return this.$store.getters.loadedMeetups;
     }
+  },
+  filters: {
+    formatDate
   }
 };
 </script>
