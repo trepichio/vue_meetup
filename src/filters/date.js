@@ -1,7 +1,7 @@
-export default (value) => {
+export default (value, locale = ['en-us']) => {
   const date = new Date(value);
   return date.toLocaleString(
-  	['pt-br'],
+  	...locale,
   	{
   		month: 'long',
   		day: '2-digit',
