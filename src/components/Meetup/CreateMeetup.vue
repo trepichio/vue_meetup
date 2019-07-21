@@ -55,13 +55,14 @@
 								></v-textarea>
 						</v-flex>
 					</v-layout>
-					<v-layout row>
+					<v-layout row mb-2>
 						<v-flex xs12 sm6 offset-sm3>
 							<h4>Choose a Date & Time:</h4>
 					    <v-date-picker
 					    	v-model="date"
 					    	:landscape="landscape"
 					    	:reactive="reactive"
+					    	:full-width=true
 					    ></v-date-picker>
 					  </v-flex>
 					</v-layout>
@@ -72,6 +73,7 @@
 					    	:landscape="landscape"
 					    	:reactive="reactive"
 					    	format="24hr"
+					    	:full-width=true
 					    ></v-time-picker>
 						</v-flex>
 				  </v-layout>
