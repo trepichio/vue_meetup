@@ -12,8 +12,10 @@ import App from "./App.vue";
 import router from "./router";
 import { store } from './store';
 import DateFilter from './filters/date';
+import AlertComponent from './components/shared/Alert.vue'
 
 Vue.filter('formatDate', DateFilter)
+Vue.component('app-alert', AlertComponent)
 
 Vue.config.productionTip = false;
 
