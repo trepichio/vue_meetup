@@ -1,3 +1,10 @@
+// Firebase App (the core Firebase SDK) is always required and must be listed first
+import * as firebase from "firebase/app";
+// Add the Firebase products that you want to use
+import "firebase/auth";
+import "firebase/database";
+import firebaseConfig from "./firebase.config"
+
 import Vue from "vue";
 import './plugins/vuetify'
 import Vuetify from 'vuetify'
@@ -25,5 +32,9 @@ Vue.use(Vuetify, {
 new Vue({
   store,
   router,
-  render: h => h(App)
+  render: h => h(App),
+  created() {
+     // Initialize Firebase
+     firebase.initializeApp(firebaseConfig);
+  }
 }).$mount("#app");
