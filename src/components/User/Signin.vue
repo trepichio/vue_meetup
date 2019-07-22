@@ -1,11 +1,20 @@
 <template>
   <v-container>
+    <v-layout row v-if="error">
+      <v-flex xs12 sm6 offset-sm3>
+        <app-alert @dismissed="onDismissed" :text="error.message"></app-alert>
+      </v-flex>
+    </v-layout>
     <v-layout>
       <v-flex xs12 sm6 offset-sm3>
         <v-card>
           <v-card-text>
             <v-container>
-              <form @submit.prevent="onSignIn">
+              <v-form
+                @submit.prevent="onSignIn"
+                ref="form"
+                v-model="valid"
+              >
                 <v-layout row>
                   <v-flex xs12>
                     <v-text-field
@@ -39,10 +48,21 @@
                 </v-layout>
                 <v-layout row>
                   <v-flex xs12>
-                    <v-btn type="submit">Sign In</v-btn>
+                    <v-btn
+                      type="submit"
+                      :loading="loading"
+                      :disabled="loading"
+                      @click="loader = 'loading'"
+                    >Sign In
+                    <template v-slot:loader>
+                      <span class="custom-loader">
+                        <v-icon light>cached</v-icon>
+                      </span>
+                    </template>
+                  </v-btn>
                   </v-flex>
                 </v-layout>
-              </form>
+              </v-form>
             </v-container>
           </v-card-text>
         </v-card>
@@ -68,14 +88,20 @@ export default {
           const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
           return pattern.test(value) || 'Invalid e-mail.'
         },
-        error: null
-      }
+      },
+      valid: false
     };
   },
 
   computed: {
     user(){
       return this.$store.getters.user
+    },
+    error(){
+      return this.$store.getters.error
+    },
+    loading(){
+      return this.$store.getters.loading
     }
   },
   watch: {
@@ -88,9 +114,17 @@ export default {
   methods: {
     onSignIn () {
       // VueX
-      this.$store.dispatch('signUserIn', {email: this.email, password: this.password } )
+      if (this.$refs.form.validate()) {
+        this.$store.dispatch('signUserIn', {email: this.email, password: this.password } )
+      }
 
+    },
+    onDismissed () {
+      this.$store.dispatch('clearError')
     }
+  },
+  created(){
+    this.$store.dispatch('clearError')
   }
 };
 </script>
