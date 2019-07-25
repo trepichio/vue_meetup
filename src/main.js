@@ -38,5 +38,6 @@ new Vue({
   created() {
      // Initialize Firebase
      firebase.initializeApp(firebaseConfig);
+     this.$store.dispatch('loadMeetups')
   }
 }).$mount("#app");

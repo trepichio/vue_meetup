@@ -11,8 +11,17 @@
       </v-flex>
     </v-layout>
     <v-layout row wrap class="mt-2">
+      <v-flex v-if="loading" xs4 offset-xs4 text-xs-center>
+        Loading...
+        <v-progress-linear
+          color="info accent-4"
+          indeterminate
+          rounded
+          height="6"
+        ></v-progress-linear>
+      </v-flex>
       <v-flex xs12>
-        <v-carousel style='cursor: pointer'>
+        <v-carousel v-if="!loading" style='cursor: pointer'>
           <v-carousel-item
             v-for="meetup in meetups"
             :key="meetup.id"
@@ -46,6 +55,9 @@ export default {
   computed: {
     meetups () {
       return this.$store.getters.featuredMeetups;
+    },
+    loading() {
+      return this.$store.getters.loading
     }
   },
   methods: {
