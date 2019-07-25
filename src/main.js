@@ -9,7 +9,7 @@ import Vue from "vue";
 import './plugins/vuetify'
 import Vuetify from 'vuetify'
 import App from "./App.vue";
-import router from "./router";
+import router from "./router/router";
 import { store } from './store';
 import DateFilter from './filters/date';
 import AlertComponent from './components/shared/Alert.vue'
