@@ -41,8 +41,8 @@ export const store = new Vuex.Store({
     		}
     	],
     	user: null,
-        loading: false,
-        error: false
+      loading: false,
+      error: false
     },
     getters: {
     	loadedMeetups(state) {
@@ -135,6 +135,9 @@ export const store = new Vuex.Store({
                     console.log(error)
                     commit('setLoading', false)
                 })
+        },
+        autoSignIn({ commit }, payload) {
+          commit('setUser', { id: payload.uid, registeredMeetup: []})
         },
         signUserUp({ commit }, payload) {
             commit('setLoading', true)
