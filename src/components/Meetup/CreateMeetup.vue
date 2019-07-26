@@ -110,6 +110,9 @@ export default {
     }
   },
   computed: {
+  	user() {
+  		return this.$store.getters.user
+  	},
     formIsValid () {
       return this.title !== '' &&
       	this.location !== '' &&
@@ -149,7 +152,14 @@ export default {
       this.$store.dispatch('createMeetup', meetupData)
 			this.$router.push('/meetups')
     }
-  }
+  },
+  watch: {
+    user (val, oldVal) {
+      if (val === null || val === undefined) {
+        this.$router.push('/')
+      }
+    }
+  },
 }
 </script>
 
