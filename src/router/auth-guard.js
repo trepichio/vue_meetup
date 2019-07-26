@@ -5,6 +5,6 @@ export default (to, from, next) => {
 		next()
 	}
 	else {
-		next('/user/signin')
+		next(`/user/signin?entryUrl=${to.path}`)
 	}
 }
