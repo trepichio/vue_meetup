@@ -20,8 +20,10 @@
           height="6"
         ></v-progress-linear>
       </v-flex>
+    </v-layout>
+    <v-layout row wrap class="mt-2" v-if="!loading">
       <v-flex xs12>
-        <v-carousel v-if="!loading" style='cursor: pointer'>
+        <v-carousel style='cursor: pointer'>
           <v-carousel-item
             v-for="meetup in meetups"
             :key="meetup.id"
