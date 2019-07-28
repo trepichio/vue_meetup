@@ -77,6 +77,21 @@ export const store = new Vuex.Store({
        createMeetup(state, payload) {
            state.loadedMeetups =  [...state.loadedMeetups, payload]
        },
+       updateMeetup(state, payload) {
+          const meetup = state.loadedMeetups.find(meetup => {
+            return meetup.id === payload.id
+          })
+          if (payload.title) {
+            meetup.title = payload.title
+          }
+          if (payload.description) {
+            meetup.description = payload.description
+          }
+          if (payload.date) {
+            meetup.date = payload.date
+          }
+
+       },
        setUser(state, payload) {
            state.user = payload
        },
@@ -129,6 +144,30 @@ export const store = new Vuex.Store({
 
                 })
 
+        },
+        updateMeetupData({ commit }, payload) {
+          commit('setLoading', true)
+          const updateObj = {}
+          if (payload.title) {
+            updateObj.title = payload.title
+          }
+          if (payload.description) {
+            updateObj.description = payload.description
+          }
+          if (payload.date) {
+            updateObj.date = payload.date
+          }
+          // update just change properties passed into provided object
+          // an empty one doesn't override anything
+          Firebase.database().ref('meetups').child(payload.id).update(updateObj)
+            .then(() => {
+              commit('setLoading', false)
+              commit('updateMeetup', payload)
+            })
+            .catch((error) => {
+              console.error(error)
+              commit('setLoading', false)
+            })
         },
         loadMeetups({ commit, getters }){
             commit('setLoading', true)

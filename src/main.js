@@ -13,9 +13,15 @@ import router from "./router/router";
 import { store } from './store';
 import DateFilter from './filters/date';
 import AlertComponent from './components/shared/Alert.vue'
+import EditMeetupDetailsDialog from './components/Meetup/Edit/EditMeetupDetailsDialog.vue'
+import EditMeetupDateDialog from './components/Meetup/Edit/EditMeetupDateDialog.vue'
+import EditMeetupTimeDialog from './components/Meetup/Edit/EditMeetupTimeDialog.vue'
 
 Vue.filter('formatDate', DateFilter)
 Vue.component('app-alert', AlertComponent)
+Vue.component('app-edit-meetup-dialog-details', EditMeetupDetailsDialog)
+Vue.component('app-edit-meetup-dialog-date', EditMeetupDateDialog)
+Vue.component('app-edit-meetup-dialog-time', EditMeetupTimeDialog)
 
 Vue.config.productionTip = false;
 
