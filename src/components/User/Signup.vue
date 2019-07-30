@@ -121,7 +121,12 @@ export default {
   watch: {
     user (val, oldVal) {
       if (val !== null && val !== undefined) {
-        this.$router.push('/')
+        if(this.$route.query.entryUrl) {
+          this.$router.push(this.$route.query.entryUrl)
+        }
+        else{
+          this.$router.push('/')
+        }
       }
     }
   },
