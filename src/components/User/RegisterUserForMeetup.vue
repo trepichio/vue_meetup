@@ -23,8 +23,6 @@
 	        <v-card-actions>
 	          <v-spacer></v-spacer>
 	          <v-btn color="blue darken-1" flat @click="confirmDialog = false">Cancel</v-btn>
-	         <!--  <v-btn v-if="!isAlreadyRegisteredAt && user" color="green darken-1" flat @click="registerUserAt">Confirm</v-btn>
-            <v-btn v-if="isAlreadyRegisteredAt && user" color="green darken-1" flat @click="unregisterUserAt">Confirm</v-btn> -->
             <v-btn v-if="user" color="green darken-1" flat @click="userRegistration">Confirm</v-btn>
 
 	        </v-card-actions>
