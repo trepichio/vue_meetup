@@ -46,6 +46,7 @@
 						<v-spacer></v-spacer>
 						<app-register-meetup-dialog
 							:meetupId="meetup.id"
+							v-if="!userIsCreator"
 							></app-register-meetup-dialog>
 					</v-card-actions>
 				</v-card>
