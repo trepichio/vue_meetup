@@ -16,12 +16,17 @@
       v-for="meetup in meetups"
       :key="meetup.id"
       v-if="!loading"
-      class="mb-2">
+      class="mb-4">
       <v-flex xs12 sm10 offset-sm1 md8 offset-md2>
-        <v-card class="info">
+       <v-hover>
+        <v-card
+        class="info"
+        slot-scope="{ hover }"
+        :class="`elevation-${hover ? 12 : 2}`"
+        >
           <v-container fluid>
             <v-layout row>
-              <v-flex xs5 sm4 md5>
+              <v-flex xs5 sm4 md5 align-self-center>
                 <v-img
                   :src="meetup.imageUrl"
                   height="130px"
@@ -47,6 +52,7 @@
             </v-layout>
           </v-container>
         </v-card>
+       </v-hover>
       </v-flex>
     </v-layout>
   </v-container>
