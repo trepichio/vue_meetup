@@ -21,11 +21,22 @@ export default {
       registerUserForMeetup({ commit, getters, dispatch }, payload) {
         commit('setLoading', true)
         const meetups = [ ...getters.user.registeredMeetup, payload.meetupId]
+        //////////////////////////////////////////////////////////////////////
+        // Instead of passing 'meetups' to server , I did this hack         //
+        // to clean User Registered Meetups which don't exist               //
+        // on server anymore. Easy and cheapier way to handle that without  //
+        // using Cloud Functions                                            //
+        //////////////////////////////////////////////////////////////////////
+        const loadedMeetups = getters.loadedMeetups
+        const newUserMeetupList = meetups.filter(register => {
+          return loadedMeetups.find(meetup => meetup.id === register)
+        })
+        console.log("newUserMeetupList", newUserMeetupList);
         Firebase.database().ref('users/' + payload.userId)
-          .child('registeredMeetups').set(meetups)
+          .child('registeredMeetups').set(newUserMeetupList)
           .then(() => {
             // This is not needed if REALTIME is being used to sync in loadUserData
-            dispatch('loadUserData', meetups)
+            dispatch('loadUserData', newUserMeetupList)
 
             commit('setLoading', false)
           })
@@ -37,12 +48,22 @@ export default {
       unregisterUserForMeetup({ commit, getters, dispatch }, payload) {
         commit('setLoading', true)
         const meetups = getters.user.registeredMeetup.filter(meetup => meetup !== payload.meetupId)
-
+        //////////////////////////////////////////////////////////////////////
+        // Instead of passing 'meetups' to server , I did this hack         //
+        // to clean User Registered Meetups which don't exist               //
+        // on server anymore. Easy and cheapier way to handle that without  //
+        // using Cloud Functions                                            //
+        //////////////////////////////////////////////////////////////////////
+        const loadedMeetups = getters.loadedMeetups
+        const newUserMeetupList = meetups.filter(register => {
+          return loadedMeetups.find(meetup => meetup.id === register)
+        })
+        console.log("newUserMeetupList", newUserMeetupList);
         Firebase.database().ref('users/' + payload.userId)
-          .child('registeredMeetups').set(meetups)
+          .child('registeredMeetups').set(newUserMeetupList)
           .then(() => {
             // This is not needed if REALTIME is being used to sync in loadUserData
-            dispatch('loadUserData', meetups)
+            dispatch('loadUserData', newUserMeetupList)
 
             commit('setLoading', false)
           })

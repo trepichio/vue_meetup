@@ -17,6 +17,7 @@ import EditMeetupDetailsDialog from './components/Meetup/Edit/EditMeetupDetailsD
 import EditMeetupDateDialog from './components/Meetup/Edit/EditMeetupDateDialog.vue'
 import EditMeetupTimeDialog from './components/Meetup/Edit/EditMeetupTimeDialog.vue'
 import RegisterUserForMeetupDialog from './components/User/RegisterUserForMeetup.vue'
+import DeleteMeetupDialog from './components/Meetup/DeleteMeetupDialog.vue'
 
 Vue.filter('formatDate', DateFilter)
 Vue.component('app-alert', AlertComponent)
@@ -24,6 +25,7 @@ Vue.component('app-edit-meetup-dialog-details', EditMeetupDetailsDialog)
 Vue.component('app-edit-meetup-dialog-date', EditMeetupDateDialog)
 Vue.component('app-edit-meetup-dialog-time', EditMeetupTimeDialog)
 Vue.component('app-register-meetup-dialog', RegisterUserForMeetupDialog)
+Vue.component('app-delete-meetup-dialog', DeleteMeetupDialog)
 
 Vue.config.productionTip = false;
 

@@ -74,8 +74,11 @@ export default {
         if (payload.date) {
           meetup.date = payload.date
         }
-
      },
+     deleteMeetup(state, payload) {
+        const newLoadedMeetups = state.loadedMeetups.filter(meetup => meetup.id !== payload.id)
+        state.loadedMeetups = newLoadedMeetups
+     }
   },
   actions: {
       createMeetup({ commit, getters }, payload) {
@@ -102,15 +105,15 @@ export default {
               .then((url) => {
                 imageUrl = url
                 return Firebase.database().ref('meetups').child(key).update({imageUrl: imageUrl})
-              })
-              .then(() => {
-                  // Reach out to Firebase and store it
-                  commit('createMeetup', {
-                    ...meetup,
-                    imageUrl: imageUrl,
-                    id: key
-                  })
-              })
+              })//this is commented to avoid duplicates when using realtime listener to load meetups
+              // .then(() => {
+              //     // Reach out to Firebase and store it
+              //     commit('createMeetup', {
+              //       ...meetup,
+              //       imageUrl: imageUrl,
+              //       id: key
+              //     })
+              // })
               .catch((error) => {
                   console.log("error", error);
 
@@ -134,7 +137,8 @@ export default {
         Firebase.database().ref('meetups').child(payload.id).update(updateObj)
           .then(() => {
             commit('setLoading', false)
-            commit('updateMeetup', payload)
+            //this is commented when using realtime listener to load meetups
+            // commit('updateMeetup', payload)
           })
           .catch((error) => {
             console.error(error)
@@ -143,8 +147,8 @@ export default {
       },
       loadMeetups({ commit, getters }){
           commit('setLoading', true)
-          Firebase.database().ref('meetups').once('value')
-              .then((data) => {
+          //Using realtime to load meetups
+          Firebase.database().ref('meetups').on('value', (data) => {
                 const meetups = []
                 const obj = data.val()
 
@@ -161,11 +165,26 @@ export default {
                 }
                 commit('setLoadedMeetups', meetups)
                 commit('setLoading', false)
-              })
-              .catch((error) => {
-                  console.log(error)
-                  commit('setLoading', false)
-              })
+          })//This is commented when using 'on' method instead of 'once'
+          // .catch((error) => {
+          //     console.log(error)
+          //     commit('setLoading', false)
+          // })
+      },
+      removeMeetup({ commit }, payload) {
+        commit('clearError')
+        commit('setLoading', true)
+        // setting null erases the node
+        Firebase.database().ref('meetups').child(payload.id).set(null)
+          .then(() => {
+            commit('deleteMeetup', payload)
+            commit('setLoading', false)
+          })
+          .catch((error) => {
+            commit('setError', error)
+            console.log(error)
+            commit('setLoading', false)
+          })
       },
   }
 };

@@ -48,6 +48,9 @@
 							:meetupId="meetup.id"
 							v-if="!userIsCreator"
 							></app-register-meetup-dialog>
+						<app-delete-meetup-dialog
+							:meetup="meetup"
+							v-if="userIsCreator"></app-delete-meetup-dialog>
 					</v-card-actions>
 				</v-card>
 			</v-flex>
@@ -84,6 +87,13 @@ export default {
     },
     loading() {
     	return this.$store.getters.loading
+    }
+  },
+  watch: {
+    meetup (val, oldVal) {
+      if(val === null || val === undefined) {
+      	this.$router.replace('/')
+      }
     }
   }
 }
