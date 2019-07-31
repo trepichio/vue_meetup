@@ -61,6 +61,7 @@ export default {
     		id: this.meetup.id,
     		date: newDateTime.toISOString()
     	})
+    	this.editDialog = false
     },
     onDismissed () {
       	this.$store.dispatch('clearError')

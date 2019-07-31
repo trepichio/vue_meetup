@@ -61,11 +61,12 @@ export default {
     	newDate.setDate(newDay)
     	newDate.setUTCMonth(newMonth)
     	newDate.setUTCFullYear(newYear)
-		console.log("newDate", newDate);
+		  console.log("newDate", newDate);
     	this.$store.dispatch('updateMeetupData', {
     		id: this.meetup.id,
     		date: newDate.toISOString()
     	})
+      this.editDialog = false
     },
     onDismissed () {
       	this.$store.dispatch('clearError')
