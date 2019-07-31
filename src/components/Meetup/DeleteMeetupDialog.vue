@@ -15,7 +15,7 @@
             <v-card-actions>
             <v-layout row justify-center>
               <v-flex xs6 sm12>
-              <v-btn color="green darken-3" flat @click="confirmDialog = false">NO! I CHANGED MY MIND</v-btn>
+              <v-btn color="green darken-3" :class="[$vuetify.breakpoint.xsOnly ? 'mb-4' : '']" flat @click="confirmDialog = false">NO! I CHANGED MY MIND</v-btn>
               <v-btn color="red darken-3" raised @click="deleteMeetup">YEAH! GET RID OF IT! </v-btn>
               </v-flex>
               </v-layout>

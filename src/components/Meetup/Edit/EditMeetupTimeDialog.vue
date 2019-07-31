@@ -11,7 +11,7 @@
 				<v-layout row wrap>
 					<v-flex xs12>
 						<v-card-title>
-							<h1>Edit Meetup Time</h1>
+							<h2>Edit Meetup Time</h2>
 						</v-card-title>
 					</v-flex>
 				</v-layout>
