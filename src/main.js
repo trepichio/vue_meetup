@@ -18,6 +18,7 @@ import EditMeetupDateDialog from './components/Meetup/Edit/EditMeetupDateDialog.
 import EditMeetupTimeDialog from './components/Meetup/Edit/EditMeetupTimeDialog.vue'
 import RegisterUserForMeetupDialog from './components/User/RegisterUserForMeetup.vue'
 import DeleteMeetupDialog from './components/Meetup/DeleteMeetupDialog.vue'
+import AppLanguageSpeedial from './components/shared/AppLanguageSpeedial.vue'
 
 Vue.filter('formatDate', DateFilter)
 Vue.component('app-alert', AlertComponent)
@@ -26,6 +27,7 @@ Vue.component('app-edit-meetup-dialog-date', EditMeetupDateDialog)
 Vue.component('app-edit-meetup-dialog-time', EditMeetupTimeDialog)
 Vue.component('app-register-meetup-dialog', RegisterUserForMeetupDialog)
 Vue.component('app-delete-meetup-dialog', DeleteMeetupDialog)
+Vue.component('app-language-speedial', AppLanguageSpeedial)
 
 Vue.config.productionTip = false;
 
@@ -46,6 +48,7 @@ new Vue({
   router,
   render: h => h(App),
   created() {
+    this.$store.dispatch('setAppLanguage', localStorage.getItem('vue_meetup_language') || 'eng')
      // Initialize Firebase
      firebase.initializeApp(firebaseConfig);
      firebase.auth().onAuthStateChanged((user) => {

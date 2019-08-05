@@ -2,7 +2,7 @@
 	<v-container>
 		<v-layout row wrap>
 			<v-flex xs12 sm6 offset-sm3>
-				<h2 class="secondary--text">Create a new Meetup</h2>
+				<h2 class="secondary--text">{{locale.createMeetup.title}}</h2>
 			</v-flex>
 		</v-layout>
 		<v-layout row wrap>
@@ -12,7 +12,7 @@
 						<v-flex xs12 sm6 offset-sm3>
 							<v-text-field
 								name="title"
-								label="Title"
+								:label=locale.createMeetup.title_label
 								id="title"
 								v-model="title"
 								required></v-text-field>
@@ -22,7 +22,7 @@
 						<v-flex xs12 sm6 offset-sm3>
 							<v-text-field
 								name="location"
-								label="Location"
+								:label=locale.createMeetup.location_label
 								id="location"
 								v-model="location"
 								required></v-text-field>
@@ -32,7 +32,7 @@
 						<v-flex xs12 sm6 offset-sm3>
 							<v-textarea
 								name="description"
-								label="Description"
+								:label=locale.createMeetup.description_label
 								auto-grow
 								value=""
 								required
@@ -47,7 +47,7 @@
 					</v-layout>
 					<v-layout row>
 						<v-flex xs12 sm6 offset-sm3>
-							<v-btn raised @click="onPickFile" class="primary">UPLOAD IMAGE</v-btn>
+							<v-btn raised @click="onPickFile" class="primary">{{locale.createMeetup.uploadImage}}</v-btn>
 							<input
 								type="file"
 								style="display: none"
@@ -65,6 +65,8 @@
 					    	:landscape="landscape"
 					    	:reactive="reactive"
 					    	:full-width=true
+					    	:locale=locale.idiom
+					    	:first-day-of-week="0"
 					    ></v-date-picker>
 					  </v-flex>
 					</v-layout>
@@ -84,7 +86,7 @@
 							<v-btn class="primary"
 							type="submit"
 							:disabled="!formIsValid"
-							>Create Meetup</v-btn>
+							>{{locale.createMeetup.confirm_btn}}</v-btn>
 						</v-flex>
 					</v-layout>
 				</form>
@@ -137,6 +139,9 @@ export default {
 	    	date.setMinutes(this.time.getMinutes())
 	    }
     	return date
+    },
+    locale () {
+    	return this.$store.getters.locale
     }
   },
   methods: {

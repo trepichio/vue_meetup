@@ -12,7 +12,7 @@
 				<v-layout row wrap>
 					<v-flex xs12>
 						<v-card-title>
-							<h1>Edit Meetup</h1>
+							<h1>{{locale.editMeetupDetailsDialog.title}}</h1>
 						</v-card-title>
 					</v-flex>
 				</v-layout>
@@ -27,13 +27,13 @@
 						<v-card-text>
 							<v-text-field
 								name="title"
-								label="Title*"
+								:label=locale.editMeetupDetailsDialog.title_label
 								id="title"
 								v-model="editedTitle"
 								required></v-text-field>
 							<v-textarea
 								name="description"
-								label="Description*"
+								:label=locale.editMeetupDetailsDialog.description_label
 								auto-grow
 								value=""
 								required
@@ -46,8 +46,8 @@
 				<v-layout row wrap>
 					<v-flex xs12>
 						<v-card-actions>
-				          <v-btn flat @click="onClose" class="blue--text darken-1">Close</v-btn>
-				          <v-btn flat @click="onSaveChanges" class="green--text darken-1">Save</v-btn>
+				          <v-btn flat @click="onClose" class="blue--text darken-1">{{locale.app.close}}</v-btn>
+				          <v-btn flat @click="onSaveChanges" class="green--text darken-1">{{locale.app.save}}</v-btn>
 				        </v-card-actions>
 					</v-flex>
 				</v-layout>
@@ -75,6 +75,9 @@ export default {
   	},
   	error() {
   		return this.$store.getters.error
+  	},
+  	locale () {
+  		return this.$store.getters.locale
   	}
   },
   methods: {

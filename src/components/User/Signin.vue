@@ -32,7 +32,7 @@
                   <v-flex xs12>
                     <v-text-field
                       name="password"
-                      label="Password"
+                      :label=locale.signin.password_label
                       id="password"
                       v-model="password"
                       autocomplete="new-password"
@@ -53,7 +53,7 @@
                       :loading="loading"
                       :disabled="loading"
                       @click="loader = 'loading'"
-                    >Sign In
+                    >{{locale.signin.confirm_btn}}
                     <template v-slot:loader>
                       <span class="custom-loader">
                         <v-icon light>cached</v-icon>
@@ -102,6 +102,9 @@ export default {
     },
     loading(){
       return this.$store.getters.loading
+    },
+    locale(){
+      return this.$store.getters.locale
     }
   },
   watch: {

@@ -2,7 +2,7 @@
   <v-container>
     <v-layout row wrap>
       <v-flex v-if="loading" xs4 offset-xs4 text-xs-center>
-        Loading...
+        {{locale.app.loading}}
         <v-progress-linear
           color="info accent-4"
           indeterminate
@@ -38,14 +38,14 @@
                     <h5 class="headline white--text mb-0">
                       {{meetup.title}}
                     </h5>
-                    <div>{{meetup.date | formatDate}}</div>
+                    <div>{{meetup.date | formatDate([locale.idiom])}}</div>
                     <div><v-icon>room</v-icon>{{meetup.location}}</div>
                   </div>
                 </v-card-title>
                 <v-card-actions>
                   <v-btn flat :to="`/meetups/${meetup.id}`">
                     <v-icon left>arrow_forward</v-icon>
-                    View Meetup
+                    {{locale.meetups.view_btn}}
                   </v-btn>
                 </v-card-actions>
               </v-flex>
@@ -71,6 +71,9 @@ export default {
     },
     loading(){
       return this.$store.getters.loading;
+    },
+    locale() {
+      return this.$store.getters.locale
     }
   }
 };

@@ -1,17 +1,17 @@
 <template>
-	<v-dialog width="350px" persistent v-model="editDialog">
+  <v-dialog width="350px" persistent v-model="editDialog">
 		<v-btn
 			accent
 			slot="activator"
 		>
-		Edit Date
+		{{locale.dateDialog.title}}
 		</v-btn>
 		<v-card>
 			<v-container>
 				<v-layout row wrap>
 					<v-flex xs12>
 						<v-card-title>
-							<h2>Edit Meetup Date</h2>
+							<h2>{{locale.dateDialog.title}}</h2>
 						</v-card-title>
 					</v-flex>
 				</v-layout>
@@ -23,6 +23,8 @@
 							actions
 							scrollable
 							full-width
+              :first-day-of-week="0"
+              :locale=locale.idiom
 						>
 							<template scope="{save, cancel}">
 								<v-btn flat @click="onClose" class="blue--text darken-1">Close</v-btn>
@@ -46,6 +48,11 @@ export default {
     return {
     	editDialog: false,
     	editableDate: null
+    }
+  },
+  computed: {
+    locale () {
+      return this.$store.getters.locale
     }
   },
   methods: {

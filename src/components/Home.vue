@@ -2,17 +2,17 @@
   <v-container>
     <v-layout row wrap>
       <v-flex xs12 sm6 text-xs-center text-sm-right>
-        <v-btn large to="/meetups" class="info">Explore Meetups</v-btn>
+        <v-btn large to="/meetups" class="info">{{locale.home.explore_btn}}</v-btn>
       </v-flex>
       <v-flex xs12 sm6 text-xs-center text-sm-left>
         <v-btn large to="/meetup/new" class="info"
-          >Organize Meetup</v-btn
+          >{{locale.home.organize_btn}}</v-btn
         >
       </v-flex>
     </v-layout>
     <v-layout row wrap class="mt-2">
       <v-flex v-if="loading" xs4 offset-xs4 text-xs-center>
-        Loading...
+        {{locale.app.loading}}
         <v-progress-linear
           color="info accent-4"
           indeterminate
@@ -39,7 +39,7 @@
     </v-layout>
     <v-layout row wrap class="mt-2">
       <v-flex xs12 text-xs-center>
-        <p>Join our awesome meetups!</p>
+        <p>{{locale.home.main_message}}</p>
       </v-flex>
     </v-layout>
   </v-container>
@@ -60,6 +60,9 @@ export default {
     },
     loading() {
       return this.$store.getters.loading
+    },
+    locale () {
+      return this.$store.getters.locale
     }
   },
   methods: {

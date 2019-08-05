@@ -23,7 +23,7 @@
           <v-list-tile-action>
             <v-icon>exit_to_app</v-icon>
           </v-list-tile-action>
-          <v-list-tile-content>Logout</v-list-tile-content>
+          <v-list-tile-content>{{locale.app.menuItems.logout}}</v-list-tile-content>
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
@@ -48,13 +48,20 @@
           v-if="userIsAuthenticated"
           @click="onLogout">
           <v-icon left>exit_to_app</v-icon>
-          Logout
+          {{locale.app.menuItems.logout}}
         </v-btn>
       </v-toolbar-items>
     </v-toolbar>
     <main>
       <router-view></router-view>
     </main>
+    <v-footer class="pa-3">
+      <app-language-speedial></app-language-speedial>
+      <v-spacer></v-spacer>
+      <strong class="subheading mr-2" v-html="locale.app.footer.contact"></strong>
+      <v-spacer></v-spacer>
+      <div>&copy; 2019 - by Trepichio, J.</div>
+    </v-footer>
   </v-app>
 </template>
 
@@ -69,20 +76,26 @@ export default {
   computed: {
     menuItems () {
       let menuItems = [
-        {icon: 'face', title: 'Sign up', link: '/user/signup' },
-        {icon: 'lock_open', title: 'Sign in', link: '/user/signin' }
+        {icon: 'face', title: this.locale.app.menuItems.sign_up, link: '/user/signup' },
+        {icon: 'lock_open', title: this.locale.app.menuItems.sign_in, link: '/user/signin' }
       ]
       if (this.userIsAuthenticated) {
         menuItems = [
-          {icon: 'supervisor_account', title: 'View Meetups', link: '/meetups' },
-          {icon: 'room', title: 'Organize Meetup', link: '/meetup/new' },
-          {icon: 'person', title: 'Profile', link: '/user/profile' }
+          {icon: 'supervisor_account', title: this.locale.app.menuItems.view_meetups, link: '/meetups' },
+          {icon: 'room', title: this.locale.app.menuItems.organize_meetups, link: '/meetup/new' },
+          {icon: 'person', title: this.locale.app.menuItems.profile, link: '/user/profile' }
         ]
       }
       return menuItems;
     },
     userIsAuthenticated() {
       return this.$store.getters.user !== null && this.$store.getters.user !== undefined
+    },
+    language () {
+      return this.$store.getters.appLanguage
+    },
+    locale() {
+      return this.$store.getters.locale
     }
   },
   methods: {

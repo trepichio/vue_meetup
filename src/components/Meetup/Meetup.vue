@@ -2,7 +2,7 @@
 	<v-container>
 		<v-layout row wrap class="mt-2" v-if="loading">
 		  <v-flex xs4 offset-xs4 text-xs-center>
-		    Loading...
+		    {{locale.app.loading}}
 		    <v-progress-linear
 		      color="info accent-4"
 		      indeterminate
@@ -30,7 +30,7 @@
 					></v-img>
 					<v-card-text>
 						<div class="info--text">
-							{{ meetup.date | formatDate}} - {{ meetup.location }}
+							{{ meetup.date | formatDate([locale.idiom])}} - {{ meetup.location }}
 							<div style="display: inline-block">
 								<app-edit-meetup-dialog-date
 									:meetup="meetup"
@@ -87,6 +87,9 @@ export default {
     },
     loading() {
     	return this.$store.getters.loading
+    },
+    locale () {
+    	return this.$store.getters.locale
     }
   },
   watch: {

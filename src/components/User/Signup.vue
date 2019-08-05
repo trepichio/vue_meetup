@@ -31,7 +31,7 @@
                   <v-flex xs12>
                     <v-text-field
                       name='password'
-                      label='Password'
+                      :label=locale.signup.password_label
                       id='password'
                       v-model='password'
                       autocomplete='new-password'
@@ -49,7 +49,7 @@
                   <v-flex xs12>
                     <v-text-field
                       name='confirmPassword'
-                      label='Confirm Password'
+                      :label=locale.signup.confirm_password_label
                       id='confirmPassword'
                       v-model='confirmPassword'
                       :type="showPwd ? 'text' : 'password'"
@@ -64,7 +64,7 @@
                       :loading="loading"
                       :disabled="loading"
                       @click="loader = 'loading'"
-                      >Sign Up
+                      >{{locale.signup.confirm_btn}}
                       <template v-slot:loader>
                         <span class="custom-loader">
                           <v-icon light>cached</v-icon>
@@ -116,6 +116,9 @@ export default {
     },
     loading(){
       return this.$store.getters.loading
+    },
+    locale(){
+      return this.$store.getters.locale
     }
   },
   watch: {

@@ -4,14 +4,14 @@
 			accent
 			slot="activator"
 		>
-		Edit Time
+		{{locale.timeDialog.title}}
 		</v-btn>
 		<v-card>
 			<v-container>
 				<v-layout row wrap>
 					<v-flex xs12>
 						<v-card-title>
-							<h2>Edit Meetup Time</h2>
+							<h2>{{locale.timeDialog.title}}</h2>
 						</v-card-title>
 					</v-flex>
 				</v-layout>
@@ -47,6 +47,11 @@ export default {
     	editDialog: false,
     	editableTime: null
     }
+  },
+  computed: {
+  	locale () {
+  		return this.$store.getters.locale
+  	}
   },
   methods: {
     onSaveChanges () {

@@ -2,28 +2,28 @@
 	<v-layout row justify-end>
 	    <v-dialog v-model="confirmDialog" persistent max-width="290">
         <template v-slot:activator="{ on }">
-          <v-btn v-if="!isAlreadyRegisteredAt"color="primary" dark v-on="on">Register</v-btn>
-          <v-btn v-else color="primary" dark v-on="on">Unregister</v-btn>
+          <v-btn v-if="!isAlreadyRegisteredAt"color="primary" dark v-on="on">{{locale.registerUserForMeetup.register}}</v-btn>
+          <v-btn v-else color="primary" dark v-on="on">{{locale.registerUserForMeetup.unregister}}</v-btn>
         </template>
 	      <v-card>
-          <v-card-title class="headline">{{ isAlreadyRegisteredAt ? 'Unregister': 'Register'}} for Meetup?</v-card-title>
+          <v-card-title class="headline">{{ isAlreadyRegisteredAt ?locale.registerUserForMeetup.unregister : locale.registerUserForMeetup.register }} {{ locale.registerUserForMeetup.title }}</v-card-title>
 	        <v-spacer></v-spacer>
-          <v-card-text v-if="!user">You need to sign in before registering.
+          <v-card-text v-if="!user">{{locale.registerUserForMeetup.warning}}
             <router-link
               tag="span"
               class="link"
               style="color: blue"
-              :to="{name: 'signin', query: { entryUrl: this.$route.path} }">Sign in</router-link> if you already have an account or <router-link
+              :to="{name: 'signin', query: { entryUrl: this.$route.path} }">{{ locale.registerUserForMeetup.signin }}</router-link>{{ locale.registerUserForMeetup.warning_message }}<router-link
                tag="span"
                class="link"
                style="color: green"
-               :to="{name: 'signup', query: { entryUrl: this.$route.path} }">create one now</router-link>.
+               :to="{name: 'signup', query: { entryUrl: this.$route.path} }">{{ locale.registerUserForMeetup.signup }}</router-link>
           </v-card-text>
-	        <v-card-text v-else>You can always change your decision later on.</v-card-text>
+	        <v-card-text v-else>{{locale.registerUserForMeetup.message}}</v-card-text>
 	        <v-card-actions>
 	          <v-spacer></v-spacer>
-	          <v-btn color="blue darken-1" flat @click="confirmDialog = false">Cancel</v-btn>
-            <v-btn v-if="user" color="green darken-1" flat @click="userRegistration">Confirm</v-btn>
+	          <v-btn color="blue darken-1" flat @click="confirmDialog = false">{{locale.registerUserForMeetup.cancel_btn}}</v-btn>
+            <v-btn v-if="user" color="green darken-1" flat @click="userRegistration">{{locale.registerUserForMeetup.confirm_btn}}</v-btn>
 
 	        </v-card-actions>
 	      </v-card>
@@ -51,6 +51,9 @@ export default {
       }
       return false
     },
+    locale() {
+      return this.$store.getters.locale
+    }
   },
   methods: {
     userRegistration() {
