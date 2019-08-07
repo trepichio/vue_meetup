@@ -147,7 +147,12 @@ export default {
   methods: {
     onCreateNewMeetup () {
 		if (!this.formIsValid) return;
-		if (!this.image) return alert('Check if you upload an image correctly')
+		if (!this.image) {
+			if (this.locale.idiom === 'pt-br') {
+				return alert('Verifique se você fez o upload de uma imagem corretamente')
+			}
+			return alert('Check if you upload an image correctly')
+		}
     	const meetupData = {
     		title: this.title,
     		location: this.location,
@@ -166,6 +171,9 @@ export default {
     	let filename = files[0].name
 
     	if (filename.lastIndexOf('.') <= 0) {
+    		if (this.locale.idiom === 'ptbr') {
+    			return alert("Por favor, adicione uma imagem válida!")
+    		}
     		return alert('Please add a valid file!')
     	}
 
